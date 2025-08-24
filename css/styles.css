@@ -1,0 +1,72 @@
+.button-reverse {
+    background: #fff;
+    color: #000;
+    padding: 0.875rem 1rem;
+    border: solid 0.0625rem #000;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    transition: all 0.14s;
+    box-shadow: 4px 4px 0 #000;
+}
+
+.buy li {
+    list-style: none;
+    padding-left: 30px;
+}
+
+.buy .mce-iconpicker--icon {
+    margin-left: -30px;
+}
+
+@media (hover: hover) {
+    .button-reverse:hover {
+        background-color: #000;
+        color: #fff;
+        transform: translate(0.25rem, 0.25rem);
+        box-shadow: none;
+    }
+
+    .pg .pg p a:not(.button, .button-reverse):hover,
+    .footer a:hover {
+        opacity: 0.7;
+    }
+
+    .pg .pg p .button-black,
+    .pg .pg p .button-white,
+    .pg .pg p .button,
+    .pg .pg p .button-reverse {
+        transition: all 300ms ease;
+    }
+
+    .pg .pg p .button-black:hover,
+    .pg .pg p .button:hover,
+    .pg .pg p .button-white:hover,
+    .pg .pg p .button-reverse:hover {
+        opacity: 1!important;
+        translate: 3px 3px;
+        box-shadow: 0px 0px 0px;
+    }
+}
+/* 
+html body .lazyframe .lazyframe__title {
+    display: block;
+    top: auto;
+    bottom: -40px;
+    color: #666 !important;
+    text-shadow: none !important;
+    background: none;
+    font-size: 13px!important;
+    pointer-events: none;
+}
+
+html body .lazyframe .lazyframe__title a {
+    /* pointer-events: all; */
+/* } */
+
+html body .lazyframe .lazyframe__title:after,
+html body .lazyframe .lazyframe__title:before {
+    background: none !important;
+}

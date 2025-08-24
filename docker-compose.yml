@@ -1,0 +1,151 @@
+version: '3.8'
+
+services:
+  # Redis for task queuing
+  redis:
+    image: redis:7-alpine
+    container_name: agentflow-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL for metadata storage
+  postgres:
+    image: postgres:15-alpine
+    container_name: agentflow-postgres
+    environment:
+      POSTGRES_DB: agentflow
+      POSTGRES_USER: agentflow
+      POSTGRES_PASSWORD: agentflow_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agentflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # IPFS for decentralized storage
+  ipfs:
+    image: ipfs/kubo:latest
+    container_name: agentflow-ipfs
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ipfs_data:/data/ipfs
+    environment:
+      - IPFS_PROFILE=server
+    healthcheck:
+      test: ["CMD", "ipfs", "id"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Task Coordinator
+  coordinator:
+    build:
+      context: .
+      dockerfile: apps/coordinator/Dockerfile
+    container_name: agentflow-coordinator
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://agentflow:agentflow_dev_password@postgres:5432/agentflow
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  # xNode Worker 1
+  xnode-1:
+    build:
+      context: .
+      dockerfile: apps/xnode/Dockerfile
+    container_name: agentflow-xnode-1
+    environment:
+      - NODE_ENV=development
+      - NODE_ID=xnode-1
+      - COORDINATOR_URL=ws://coordinator:8080
+      - REDIS_URL=redis://redis:6379
+      - MAX_CONCURRENT_TASKS=3
+    ports:
+      - "8081:8081"
+    depends_on:
+      - coordinator
+      - redis
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./sandbox/xnode-1:/app/sandbox
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  # xNode Worker 2
+  xnode-2:
+    build:
+      context: .
+      dockerfile: apps/xnode/Dockerfile
+    container_name: agentflow-xnode-2
+    environment:
+      - NODE_ENV=development
+      - NODE_ID=xnode-2
+      - COORDINATOR_URL=ws://coordinator:8080
+      - REDIS_URL=redis://redis:6379
+      - MAX_CONCURRENT_TASKS=3
+    ports:
+      - "8082:8081"
+    depends_on:
+      - coordinator
+      - redis
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./sandbox/xnode-2:/app/sandbox
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  # Web Application
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agentflow-web
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_COORDINATOR_URL=ws://localhost:8080
+      - NEXT_PUBLIC_IPFS_GATEWAY=http://localhost:8080
+      - DATABASE_URL=postgresql://agentflow:agentflow_dev_password@postgres:5432/agentflow
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - coordinator
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  postgres_data:
+  ipfs_data:
+
+networks:
+  default:
+    name: agentflow-network
