@@ -66,6 +66,7 @@ Decentralized by Design → Censorship resistance, verifiable transparency.
 Monetization for All → Sustainable revenue model for creators.
 
 Scalable Runtime → Distributed compute across xNodes.
+<img width="4350" height="24320" alt="agentflow_workflow" src="https://github.com/user-attachments/assets/db6fb74a-1d5f-4e46-b734-d92682b5647e" />
 
 📌 License
 
