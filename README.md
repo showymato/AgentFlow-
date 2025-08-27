@@ -4,9 +4,6 @@ AgentFlow – Decentralized No-Code AI Agent Builder
 
 AgentFlow is a decentralized no-code platform that empowers anyone to create, connect, and deploy AI agents using a drag-and-drop interface. Built on OpenXAI, xNodes, and decentralized storage/compute networks, AgentFlow democratizes AI creation while ensuring ownership, transparency, and sustainable monetization.
 
-workflow
-<img width="2063" height="3840" alt="Untitled diagram _ Mermaid Chart-2025-08-26-063807" src="https://github.com/user-attachments/assets/d02e4b18-8779-441f-9439-c1025d6d5fa9" />
-
 
 🌍 Vision & Mission
 
@@ -45,6 +42,10 @@ Research & Education → AI tutors, knowledge graphs, analysis tools.
 Creative Tools → Meme generators, design assistants.
 
 Personal Agents → Scheduling, health monitoring, finance tracking.
+
+#Workflow
+<img width="2063" height="3840" alt="Untitled diagram _ Mermaid Chart-2025-08-26-063807" src="https://github.com/user-attachments/assets/d02e4b18-8779-441f-9439-c1025d6d5fa9" />
+
 
 🗺️ Roadmap
 
