@@ -2,6 +2,8 @@ Youtube::https://youtu.be/jKjfUQZlC_g?si=IequCkZuBMySo_vq
 
 
 AgentFlow – Decentralized No-Code AI Agent Builder
+<img width="500" height="500" alt="Gemini_Generated_Image_c51uxkc51uxkc51u-removebg-preview" src="https://github.com/user-attachments/assets/0840b8e4-315b-44f4-b366-c717e26326c5" />
+
 
 AgentFlow is a decentralized no-code platform that empowers anyone to create, connect, and deploy AI agents using a drag-and-drop interface. Built on OpenXAI, xNodes, and decentralized storage/compute networks, AgentFlow democratizes AI creation while ensuring ownership, transparency, and sustainable monetization.
 
@@ -66,7 +68,6 @@ Decentralized by Design → Censorship resistance, verifiable transparency.
 Monetization for All → Sustainable revenue model for creators.
 
 Scalable Runtime → Distributed compute across xNodes.
-<img width="4350" height="24320" alt="agentflow_workflow" src="https://github.com/user-attachments/assets/db6fb74a-1d5f-4e46-b734-d92682b5647e" />
 
 📌 License
 
