@@ -49,9 +49,12 @@ Personal Agents → Scheduling, health monitoring, finance tracking.
 
 🗺️ Roadmap
 
-Phase 1 – Prototype: Launch drag-and-drop builder MVP + OpenXAI integration
-Phase 2 – Decentralized Runtime: Integrate xNodes, IPFS, on-chain agent registry
-Phase 3 – Marketplace Launch: Public AI agent marketplace + monetization layer
+Phase 1 – Prototype: Launch drag-and-drop builder MVP + OpenXAI integration.
+
+Phase 2 – Decentralized Runtime: Integrate xNodes, IPFS, on-chain agent registry.
+
+Phase 3 – Marketplace Launch: Public AI agent marketplace + monetization layer.
+
 Phase 4 – Governance & Scaling: DAO governance, multi-chain expansion, cross-agent interoperability
 
 🏆 Competitive Edge
